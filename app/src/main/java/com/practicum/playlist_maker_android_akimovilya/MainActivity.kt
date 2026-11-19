@@ -12,13 +12,13 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.LibraryMusic
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.FavoriteBorder
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -42,18 +42,10 @@ class MainActivity : ComponentActivity() {
                         )
                     },
                     onPlaylistClick = {
-                        Toast.makeText(
-                            this,
-                            "Нажата кнопка \"Плейлисты\"",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        showToast("Плейлисты")
                     },
                     onFavoritesClick = {
-                        Toast.makeText(
-                            this,
-                            "Нажата кнопка \"Избранное\"",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        showToast("Избранное")
                     },
                     onSettingsClick = {
                         startActivity(
@@ -64,7 +56,19 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+    private fun showToast(buttonName: String) {
+        Toast.makeText(
+            this,
+            "Нажата кнопка \"$buttonName\"",
+            Toast.LENGTH_SHORT
+        ).show()
+    }
 }
+
+private val MainBlue = Color(0xFF3772E7)
+private val MainText = Color(0xFF1A1B22)
+private val ArrowColor = Color(0xFFADB0B7)
 
 @Composable
 fun MainScreen(
@@ -73,48 +77,41 @@ fun MainScreen(
     onFavoritesClick: () -> Unit,
     onSettingsClick: () -> Unit
 ) {
-    val blue = Color(0xFF3775E8)
-
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White)
+            .background(MainBlue)
     ) {
+
+        // Верхняя синяя шапка
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(82.dp)
-                .background(
-                    blue,
-                    RoundedCornerShape(
-                        topStart = 12.dp,
-                        topEnd = 12.dp
-                    )
-                )
-                .padding(16.dp),
-            contentAlignment = Alignment.TopStart
+                .height(70.dp)
+                .padding(horizontal = 16.dp),
+            contentAlignment = Alignment.CenterStart
         ) {
             Text(
-                text = "Playlist maker",
+                text = "Playlist Maker",
                 color = Color.White,
                 fontSize = 22.sp,
-                fontWeight = FontWeight.SemiBold
+                fontWeight = FontWeight.Medium
             )
         }
 
+        // Белая область с меню
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .offset(y = (-12).dp)
                 .clip(
                     RoundedCornerShape(
-                        topStart = 18.dp,
-                        topEnd = 18.dp
+                        topStart = 16.dp,
+                        topEnd = 16.dp
                     )
                 )
                 .background(Color.White)
-                .padding(top = 8.dp)
         ) {
+
             MenuItem(
                 title = "Поиск",
                 icon = Icons.Default.Search,
@@ -151,25 +148,26 @@ fun MenuItem(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .height(68.dp)
+            .height(66.dp)
             .clickable { onClick() }
-            .padding(horizontal = 18.dp),
+            .padding(horizontal = 28.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
+
         Icon(
             imageVector = icon,
             contentDescription = title,
-            tint = Color(0xFF19191F),
-            modifier = Modifier.size(24.dp)
+            tint = MainText,
+            modifier = Modifier.size(22.dp)
         )
 
-        Spacer(modifier = Modifier.width(12.dp))
+        Spacer(modifier = Modifier.width(10.dp))
 
         Text(
             text = title,
-            fontSize = 22.sp,
+            fontSize = 20.sp,
             fontWeight = FontWeight.Medium,
-            color = Color(0xFF19191F)
+            color = MainText
         )
 
         Spacer(modifier = Modifier.weight(1f))
@@ -177,8 +175,8 @@ fun MenuItem(
         Icon(
             imageVector = Icons.Default.ChevronRight,
             contentDescription = null,
-            tint = Color(0xFFADB0B7),
-            modifier = Modifier.size(24.dp)
+            tint = ArrowColor,
+            modifier = Modifier.size(22.dp)
         )
     }
 }
