@@ -1,3 +1,34 @@
 <resources>
-    <string name="app_name">playlist-maker-android-AkimovIlya</string>
+    <string name="app_name">Playlist Maker</string>
+
+    <string name="main_title">Playlist Maker</string>
+    <string name="menu_search">Поиск</string>
+    <string name="menu_playlists">Плейлисты</string>
+    <string name="menu_favorites">Избранное</string>
+    <string name="menu_settings">Настройки</string>
+    <string name="toast_button_pressed">Нажата кнопка «%1$s»</string>
+
+    <string name="search_screen_title">Поиск</string>
+    <string name="search_field_hint">Поиск</string>
+    <string name="search_icon_description">Поиск</string>
+    <string name="clear_search_description">Очистить поисковый запрос</string>
+    <string name="back_button_description">Назад</string>
+
+    <string name="settings_screen_title">Настройки</string>
+    <string name="settings_dark_theme">Тёмная тема</string>
+    <string name="settings_share_app">Поделиться приложением</string>
+    <string name="settings_contact_developers">Написать разработчикам</string>
+    <string name="settings_offer">Пользовательское соглашение</string>
+
+    <string name="share_chooser_title">Поделиться приложением</string>
+    <string name="share_message">Попробуй приложение Playlist Maker!</string>
+
+    <string name="developer_email">akimov.ilya2018@gmail.com</string>
+    <string name="developer_email_subject">Сообщение разработчикам и разработчицам приложения Playlist Maker</string>
+    <string name="developer_email_body">Спасибо разработчикам и разработчицам за крутое приложение!</string>
+
+    <string name="practicum_offer_url">https://yandex.ru/legal/practicum_offer/ru/</string>
+
+    <string name="email_client_not_found">Не найдено приложение для отправки электронной почты</string>
+    <string name="browser_not_found">Не найден браузер для открытия ссылки</string>
 </resources>

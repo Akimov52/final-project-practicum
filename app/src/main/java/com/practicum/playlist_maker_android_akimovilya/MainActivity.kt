@@ -1,8 +1,6 @@
 package com.practicum.playlist_maker_android_akimovilya
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -24,9 +22,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.rememberNavController
 
 class MainActivity : ComponentActivity() {
 
@@ -35,40 +36,12 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             MaterialTheme {
-                MainScreen(
-                    onSearchClick = {
-                        startActivity(
-                            Intent(this, SearchActivity::class.java)
-                        )
-                    },
-                    onPlaylistClick = {
-                        showToast("Плейлисты")
-                    },
-                    onFavoritesClick = {
-                        showToast("Избранное")
-                    },
-                    onSettingsClick = {
-                        startActivity(
-                            Intent(this, SettingsActivity::class.java)
-                        )
-                    }
-                )
+                val navController = rememberNavController()
+                PlaylistHost(navController = navController)
             }
         }
     }
-
-    private fun showToast(buttonName: String) {
-        Toast.makeText(
-            this,
-            "Нажата кнопка \"$buttonName\"",
-            Toast.LENGTH_SHORT
-        ).show()
-    }
 }
-
-private val MainBlue = Color(0xFF3772E7)
-private val MainText = Color(0xFF1A1B22)
-private val ArrowColor = Color(0xFFADB0B7)
 
 @Composable
 fun MainScreen(
@@ -80,10 +53,8 @@ fun MainScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(MainBlue)
+            .background(PlaylistBlue)
     ) {
-
-        // Верхняя синяя шапка
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -92,14 +63,13 @@ fun MainScreen(
             contentAlignment = Alignment.CenterStart
         ) {
             Text(
-                text = "Playlist Maker",
+                text = stringResource(R.string.main_title),
                 color = Color.White,
                 fontSize = 22.sp,
                 fontWeight = FontWeight.Medium
             )
         }
 
-        // Белая область с меню
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -111,27 +81,26 @@ fun MainScreen(
                 )
                 .background(Color.White)
         ) {
-
             MenuItem(
-                title = "Поиск",
+                title = stringResource(R.string.menu_search),
                 icon = Icons.Default.Search,
                 onClick = onSearchClick
             )
 
             MenuItem(
-                title = "Плейлисты",
+                title = stringResource(R.string.menu_playlists),
                 icon = Icons.Default.LibraryMusic,
                 onClick = onPlaylistClick
             )
 
             MenuItem(
-                title = "Избранное",
+                title = stringResource(R.string.menu_favorites),
                 icon = Icons.Outlined.FavoriteBorder,
                 onClick = onFavoritesClick
             )
 
             MenuItem(
-                title = "Настройки",
+                title = stringResource(R.string.menu_settings),
                 icon = Icons.Default.Settings,
                 onClick = onSettingsClick
             )
@@ -149,15 +118,14 @@ fun MenuItem(
         modifier = Modifier
             .fillMaxWidth()
             .height(66.dp)
-            .clickable { onClick() }
+            .clickable(onClick = onClick)
             .padding(horizontal = 28.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-
         Icon(
             imageVector = icon,
             contentDescription = title,
-            tint = MainText,
+            tint = PlaylistText,
             modifier = Modifier.size(22.dp)
         )
 
@@ -167,7 +135,7 @@ fun MenuItem(
             text = title,
             fontSize = 20.sp,
             fontWeight = FontWeight.Medium,
-            color = MainText
+            color = PlaylistText
         )
 
         Spacer(modifier = Modifier.weight(1f))
@@ -175,8 +143,26 @@ fun MenuItem(
         Icon(
             imageVector = Icons.Default.ChevronRight,
             contentDescription = null,
-            tint = ArrowColor,
+            tint = PlaylistArrow,
             modifier = Modifier.size(22.dp)
+        )
+    }
+}
+
+@Preview(
+    showBackground = true,
+    name = "Playlist Maker",
+    widthDp = 360,
+    heightDp = 800
+)
+@Composable
+fun MainScreenPreview() {
+    MaterialTheme {
+        MainScreen(
+            onSearchClick = {},
+            onPlaylistClick = {},
+            onFavoritesClick = {},
+            onSettingsClick = {}
         )
     }
 }
